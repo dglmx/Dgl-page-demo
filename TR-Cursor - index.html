@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Talent Room — Asesoría de carrera y transición profesional por Yazmin Rios. Reconecta con tu valor profesional.">
+  <title>Talent Room — Reconecta con Tu Valor Profesional</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --v950: #0E0940; --v900: #160E5C; --v800: #231770; --v700: #3A2A96;
+      --v600: #5244B2; --v500: #6D5FCC; --v400: #9489DC; --v300: #BBB5EC;
+      --v200: #DAD8F4; --v100: #EDEAF9; --v50:  #F5F3FD;
+      --c600: #B84331; --c500: #D95C40; --c400: #E87252; --c300: #F09676;
+      --c200: #F8C4AE; --c100: #FEEEE9;
+      --n900: #0C0B18; --n800: #1A1926; --n700: #2C2A40; --n600: #443F5E;
+      --n500: #6B677F; --n400: #928FA8; --n300: #B9B6CA; --n200: #D5D3E2;
+      --n100: #ECEAF4; --n50:  #F4F2FA; --white: #FFFFFF;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --sh-xs: 0 2px 10px rgba(22,14,92,.07); --sh-sm: 0 4px 18px rgba(22,14,92,.1);
+      --sh-md: 0 10px 36px rgba(22,14,92,.14); --sh-lg: 0 20px 60px rgba(22,14,92,.18);
+      --sh-xl: 0 32px 80px rgba(22,14,92,.22);
+      --r-xs:8px; --r-sm:14px; --r-md:20px; --r-lg:28px; --r-xl:40px; --r-full:9999px;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body); color: var(--n800); background: var(--white);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      padding: 22px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,.94); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); padding: 14px 56px; box-shadow: var(--sh-xs);
+    }
+    .nav-logo { text-decoration: none; line-height: 1.1; }
+    .nav-logo-main {
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+      color: var(--white); letter-spacing: -.02em; display: block; transition: color .4s;
+    }
+    .nav.scrolled .nav-logo-main { color: var(--v700); }
+    .nav-logo-sub {
+      font-size: .62rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.55); display: block; transition: color .4s;
+    }
+    .nav.scrolled .nav-logo-sub { color: var(--n400); }
+
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.82);
+      text-decoration: none; letter-spacing: .01em; transition: color .28s;
+    }
+    .nav.scrolled .nav-links a { color: var(--n600); }
+    .nav-links a:hover { color: var(--c400); }
+    .nav.scrolled .nav-links a:hover { color: var(--c500); }
+    .nav-cta {
+      background: var(--c500) !important; color: var(--white) !important;
+      padding: 10px 22px; border-radius: var(--r-full); font-weight: 600 !important;
+      box-shadow: 0 4px 16px rgba(217,98,64,.32); transition: all .28s var(--ease) !important;
+    }
+    .nav-cta:hover {
+      background: var(--c400) !important; transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(217,98,64,.44) !important;
+    }
+
+    /* ─── LANG TOGGLE ─── */
+    .lang-toggle {
+      display: flex; align-items: center; gap: 2px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--r-full); padding: 4px 6px;
+      transition: background .4s, border-color .4s;
+    }
+    .nav.scrolled .lang-toggle { background: var(--n50); border-color: var(--n200); }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-body); font-size: .72rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(255,255,255,.45); padding: 3px 8px; border-radius: var(--r-full);
+      transition: all .25s var(--ease);
+    }
+    .lang-btn.active {
+      color: var(--white); background: rgba(255,255,255,.15);
+    }
+    .nav.scrolled .lang-btn { color: var(--n400); }
+    .nav.scrolled .lang-btn.active { color: var(--v700); background: var(--v100); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px; transition: all .3s;
+    }
+    .nav.scrolled .nav-hamburger span { background: var(--v700); }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-nav {
+      position: fixed; inset: 0; z-index: 999; background: var(--v900);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transform: translateX(100%); transition: transform .4s var(--ease);
+    }
+    .mobile-nav.open { transform: translateX(0); }
+    .mobile-nav a {
+      font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+      color: rgba(255,255,255,.85); text-decoration: none; transition: color .25s;
+    }
+    .mobile-nav a:hover { color: var(--c300); }
+    .mobile-nav-close {
+      position: absolute; top: 24px; right: 28px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.6); font-size: 1.5rem; transition: color .25s;
+    }
+    .mobile-nav-close:hover { color: var(--white); }
+    .mobile-lang-toggle {
+      display: flex; align-items: center; gap: 8px; margin-top: 8px;
+    }
+    .mobile-lang-btn {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--r-full); padding: 8px 20px; cursor: pointer;
+      font-family: var(--font-body); font-size: .8rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);
+      transition: all .25s;
+    }
+    .mobile-lang-btn.active { color: var(--white); background: rgba(255,255,255,.18); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(140deg, var(--v950) 0%, var(--v800) 50%, #4E3AA8 100%);
+      position: relative; display: flex; align-items: center;
+      overflow: hidden; padding: 130px 56px 100px;
+    }
+    .hero-orb { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform; }
+    .hero-orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,114,82,.16) 0%, transparent 68%);
+      top: -160px; right: -120px; animation: orb-float 9s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(109,95,204,.25) 0%, transparent 70%);
+      bottom: -80px; left: 28%; animation: orb-float 11s ease-in-out infinite reverse;
+    }
+    .hero-orb-3 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(232,114,82,.1) 0%, transparent 70%);
+      top: 35%; left: -60px; animation: orb-float 7s ease-in-out infinite; animation-delay: -4s;
+    }
+    @keyframes orb-float {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(18px,-22px) scale(1.04); }
+      66%      { transform: translate(-12px,10px) scale(.97); }
+    }
+    .hero-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 740px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.1); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.82);
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: var(--r-full); margin-bottom: 30px;
+      animation: fade-up .8s var(--ease) .15s both;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; background: var(--c300); border-radius: 50%;
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.75)} }
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.6rem); font-weight: 700;
+      color: var(--white); line-height: 1.1; letter-spacing: -.025em; margin-bottom: 24px;
+      animation: fade-up .8s var(--ease) .3s both;
+    }
+    .hero-h1 em { font-style: normal; color: var(--c300); }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,.68); line-height: 1.8;
+      max-width: 520px; margin-bottom: 44px; animation: fade-up .8s var(--ease) .46s both;
+    }
+    .hero-actions {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      animation: fade-up .8s var(--ease) .6s both;
+    }
+    .btn-primary {
+      background: var(--c500); color: var(--white); padding: 16px 36px;
+      border-radius: var(--r-full); font-size: .92rem; font-weight: 600;
+      text-decoration: none; letter-spacing: .01em;
+      box-shadow: 0 8px 28px rgba(217,98,64,.38); transition: all .3s var(--ease); display: inline-block;
+    }
+    .btn-primary:hover { background: var(--c400); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(217,98,64,.5); }
+    .btn-outline {
+      color: rgba(255,255,255,.85); padding: 16px 36px; border-radius: var(--r-full);
+      font-size: .92rem; font-weight: 500; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,.28); transition: all .3s var(--ease); display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.5); }
+    .hero-scroll-cue {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.4); font-size: .66rem; letter-spacing: .12em;
+      text-transform: uppercase; cursor: pointer; background: none; border: none;
+      animation: fade-up 1s var(--ease) 1.1s both;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.45), transparent);
+      animation: scroll-pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse { 0%,100%{transform:scaleY(1);opacity:.5} 50%{transform:scaleY(.55);opacity:1} }
+
+    /* ─── STATS ─── */
+    .stats-strip { background: var(--white); border-bottom: 1px solid var(--n100); }
+    .stats-strip-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 56px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 36px 24px; display: flex; flex-direction: column; align-items: center;
+      border-right: 1px solid var(--n100); text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 2.2rem; font-weight: 700;
+      color: var(--v700); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label { font-size: .78rem; color: var(--n500); letter-spacing: .02em; line-height: 1.5; }
+
+    /* ─── COMMONS ─── */
+    section { padding: 100px 56px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--c500); margin-bottom: 16px;
+    }
+    .label::before { content:''; display:block; width:26px; height:2px; background:currentColor; border-radius:2px; }
+    .label--center { justify-content: center; }
+    .label--light { color: var(--c300); }
+    .h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 700; color: var(--n800);
+      line-height: 1.18; letter-spacing: -.025em; margin-bottom: 16px;
+    }
+    .h2--white { color: var(--white); }
+    .section-sub { font-size: 1.0375rem; color: var(--n500); line-height: 1.78; max-width: 560px; }
+    .section-sub--white { color: rgba(255,255,255,.65); }
+
+    /* ─── FADE-UP ─── */
+    @keyframes fade-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .fu { opacity:0; transform:translateY(30px); transition:opacity .65s var(--ease),transform .65s var(--ease); }
+    .fu.in { opacity:1; transform:translateY(0); }
+    .fd1{transition-delay:.1s} .fd2{transition-delay:.18s} .fd3{transition-delay:.28s}
+    .fd4{transition-delay:.38s} .fd5{transition-delay:.48s} .fd6{transition-delay:.58s}
+
+    /* ─── PHILOSOPHY ─── */
+    .philosophy { background: var(--n50); }
+    .phil-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; margin-top:60px; }
+    .phil-text p { font-size:1.0375rem; color:var(--n600); line-height:1.82; margin-bottom:20px; }
+    .phil-text p:last-child { margin-bottom:0; }
+    .phil-text strong { color:var(--n800); font-weight:600; }
+    .table-card {
+      background:var(--white); border-radius:var(--r-lg); padding:40px;
+      box-shadow:var(--sh-md); position:relative; overflow:hidden;
+    }
+    .table-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--v700),var(--c500)); }
+    .table-card-head { text-align:center; margin-bottom:28px; }
+    .table-card-title { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--n800); margin-bottom:6px; }
+    .table-card-sub { font-size:.78rem; color:var(--n400); letter-spacing:.04em; }
+    .table-legs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .table-leg {
+      background:var(--v50); border:1.5px solid var(--v200); border-radius:var(--r-sm);
+      padding:20px 18px; transition:all .3s var(--ease); cursor:default;
+    }
+    .table-leg:hover { background:var(--white); border-color:var(--v500); transform:translateY(-3px); box-shadow:var(--sh-sm); }
+    .leg-icon { font-size:1.4rem; margin-bottom:8px; }
+    .leg-name { font-weight:700; font-size:.84rem; color:var(--v700); margin-bottom:3px; }
+    .leg-desc { font-size:.76rem; color:var(--n500); line-height:1.5; }
+
+    /* ─── ABOUT ─── */
+    .about { background:var(--white); }
+    .about-grid { display:grid; grid-template-columns:400px 1fr; gap:80px; align-items:start; margin-top:60px; }
+    .about-visual { position:relative; }
+    .about-photo {
+      width:100%; aspect-ratio:4/5; border-radius:var(--r-lg); overflow:hidden;
+      box-shadow:var(--sh-xl);
+      background:linear-gradient(145deg, var(--v800) 0%, var(--v600) 55%, var(--c400) 100%);
+      position:relative;
+    }
+    .photo-initials {
+      position:absolute; top:45%; left:50%; transform:translate(-50%,-50%);
+      font-family:var(--font-display); font-size:6.5rem; font-weight:700;
+      color:rgba(255,255,255,.13); letter-spacing:-.04em; user-select:none;
+    }
+    .photo-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(14,9,64,.82) 0%, transparent 50%);
+      display:flex; align-items:flex-end; padding:30px;
+    }
+    .photo-name-main { font-family:var(--font-display); font-size:1.55rem; font-weight:700; color:var(--white); display:block; line-height:1.2; }
+    .photo-name-sub { font-size:.76rem; color:rgba(255,255,255,.65); letter-spacing:.06em; display:block; margin-top:3px; }
+    .about-badge {
+      position:absolute; background:var(--white); border-radius:var(--r-md);
+      padding:14px 18px; box-shadow:var(--sh-lg);
+      display:flex; align-items:center; gap:12px; min-width:148px;
+    }
+    .about-badge-1 { top:28px; right:-28px; }
+    .about-badge-2 { bottom:100px; right:-28px; }
+    .badge-num { font-family:var(--font-display); font-size:1.55rem; font-weight:700; color:var(--v700); line-height:1; }
+    .badge-label { font-size:.7rem; color:var(--n500); line-height:1.45; max-width:76px; }
+    .about-content h3 {
+      font-family:var(--font-display); font-size:clamp(1.4rem,2.4vw,1.75rem);
+      font-weight:700; color:var(--n800); line-height:1.3; margin-bottom:20px; letter-spacing:-.02em;
+    }
+    .about-content p { font-size:1rem; color:var(--n600); line-height:1.82; margin-bottom:18px; }
+    .about-content p:last-of-type { margin-bottom:0; }
+    .credential-tags { display:flex; flex-wrap:wrap; gap:8px; margin:28px 0 32px; }
+    .ctag {
+      background:var(--v50); color:var(--v700); border:1px solid var(--v200);
+      padding:6px 15px; border-radius:var(--r-full); font-size:.78rem; font-weight:600;
+    }
+    .companies-section { margin-top:32px; }
+    .companies-label { font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--n400); margin-bottom:14px; }
+    .companies-chips { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip {
+      background:var(--n50); border:1.5px solid var(--n200); color:var(--n600);
+      padding:8px 18px; border-radius:var(--r-sm); font-size:.8rem; font-weight:700;
+      letter-spacing:.04em; transition:all .25s var(--ease);
+    }
+    .chip:hover { border-color:var(--v400); color:var(--v700); background:var(--v50); }
+
+    /* ─── SERVICES ─── */
+    .services { background:var(--n50); }
+    .services-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; gap:32px; }
+    .services-note { font-size:.9rem; color:var(--n500); line-height:1.7; max-width:300px; text-align:right; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .scard {
+      background:var(--white); border-radius:var(--r-lg); padding:36px 30px;
+      border:1.5px solid var(--n100); transition:all .35s var(--ease); position:relative; overflow:hidden;
+    }
+    .scard::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:0;
+      background:linear-gradient(to top, var(--v50), transparent);
+      transition:height .35s var(--ease); pointer-events:none;
+    }
+    .scard:hover { transform:translateY(-6px); box-shadow:var(--sh-lg); border-color:var(--v200); }
+    .scard:hover::after { height:55%; }
+    .scard-icon {
+      width:50px; height:50px; background:var(--v100); border-radius:var(--r-sm);
+      display:flex; align-items:center; justify-content:center; margin-bottom:22px;
+      transition:background .35s var(--ease);
+    }
+    .scard:hover .scard-icon { background:var(--v700); }
+    .scard-icon svg {
+      width:22px; height:22px; stroke:var(--v600); fill:none;
+      stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
+      transition:stroke .35s var(--ease);
+    }
+    .scard:hover .scard-icon svg { stroke:var(--white); }
+    .scard-title { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--n800); margin-bottom:11px; letter-spacing:-.01em; }
+    .scard-desc { font-size:.88rem; color:var(--n500); line-height:1.75; }
+
+    /* ─── PROCESS ─── */
+    .process { background:var(--white); }
+    .process-head { text-align:center; max-width:540px; margin:0 auto 64px; }
+    .process-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative; }
+    .process-steps::before {
+      content:''; position:absolute; top:40px;
+      left:calc(16.67% + 16px); right:calc(16.67% + 16px);
+      height:1.5px; background:linear-gradient(90deg, var(--v300), var(--c300));
+    }
+    .pstep { text-align:center; padding:0 36px; }
+    .pstep-num {
+      width:80px; height:80px; border-radius:50%;
+      background:linear-gradient(145deg, var(--v700), var(--v500));
+      color:var(--white); font-family:var(--font-display); font-size:1.5rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center; margin:0 auto 30px;
+      position:relative; z-index:1; box-shadow:0 8px 26px rgba(58,42,150,.3);
+      transition:all .3s var(--ease);
+    }
+    .pstep:hover .pstep-num { transform:scale(1.08); box-shadow:0 12px 36px rgba(58,42,150,.42); }
+    .pstep-title { font-family:var(--font-display); font-size:1.2rem; font-weight:600; color:var(--n800); margin-bottom:12px; letter-spacing:-.01em; }
+    .pstep-desc { font-size:.88rem; color:var(--n500); line-height:1.78; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background:linear-gradient(145deg, var(--v900) 0%, var(--v700) 100%);
+      position:relative; overflow:hidden;
+    }
+    .testimonials::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:radial-gradient(circle at 15% 50%, rgba(232,114,82,.12) 0%, transparent 48%),
+                 radial-gradient(circle at 85% 20%, rgba(109,95,204,.18) 0%, transparent 50%);
+    }
+    .testimonials-inner { position:relative; z-index:1; }
+    .tgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:52px; }
+    .tcard {
+      background:rgba(255,255,255,.07); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.1); border-radius:var(--r-lg);
+      padding:34px 30px; transition:all .35s var(--ease);
+    }
+    .tcard:hover { background:rgba(255,255,255,.11); transform:translateY(-4px); border-color:rgba(255,255,255,.18); }
+    .tquote { font-family:var(--font-display); font-size:2.8rem; color:var(--c300); line-height:1; margin-bottom:14px; }
+    .ttext { font-size:.93rem; color:rgba(255,255,255,.83); line-height:1.82; margin-bottom:26px; font-style:italic; }
+    .tauthor { display:flex; align-items:center; gap:14px; }
+    .tavatar {
+      width:42px; height:42px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg, var(--v500), var(--c400));
+      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.84rem; color:var(--white);
+    }
+    .tname { font-weight:600; font-size:.88rem; color:var(--white); }
+    .trole { font-size:.74rem; color:rgba(255,255,255,.5); margin-top:2px; }
+
+    /* ─── INSIGHTS ─── */
+    .insights { background:var(--n50); }
+    .insights-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:52px; }
+    .icard { background:var(--white); border-radius:var(--r-lg); overflow:hidden; border:1.5px solid var(--n100); transition:all .35s var(--ease); }
+    .icard:hover { transform:translateY(-5px); box-shadow:var(--sh-lg); border-color:transparent; }
+    .icard-visual { height:132px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; position:relative; }
+    .icard:nth-child(1) .icard-visual { background:linear-gradient(135deg,var(--v100),var(--v200)); }
+    .icard:nth-child(2) .icard-visual { background:linear-gradient(135deg,var(--c100),var(--c200)); }
+    .icard:nth-child(3) .icard-visual { background:linear-gradient(135deg,#E3F1FD,#C2DEFF); }
+    .icard:nth-child(4) .icard-visual { background:linear-gradient(135deg,#E4F7EC,#C3EDDA); }
+    .icard:nth-child(5) .icard-visual { background:linear-gradient(135deg,#FDF5E4,#F5DFA0); }
+    .icard:nth-child(6) .icard-visual { background:linear-gradient(135deg,var(--v50),var(--c100)); }
+    .itopic {
+      position:absolute; top:12px; left:12px;
+      font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      background:rgba(255,255,255,.88); color:var(--n600); padding:4px 10px; border-radius:var(--r-full);
+    }
+    .icard-body { padding:24px 22px; }
+    .icard-title { font-family:var(--font-display); font-size:1rem; font-weight:600; color:var(--n800); line-height:1.42; margin-bottom:9px; }
+    .icard-text { font-size:.82rem; color:var(--n500); line-height:1.68; }
+
+    /* ─── BOOK ─── */
+    .book {
+      background:linear-gradient(140deg, var(--c500) 0%, var(--c400) 60%, #EE8060 100%);
+      position:relative; overflow:hidden; padding:100px 56px; text-align:center;
+    }
+    .book::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:radial-gradient(circle at 12% 50%, rgba(255,255,255,.12) 0%, transparent 50%),
+                 radial-gradient(circle at 88% 50%, rgba(255,255,255,.08) 0%, transparent 50%);
+    }
+    .book-inner { position:relative; z-index:1; max-width:620px; margin:0 auto; }
+    .book-title { font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--white); line-height:1.18; letter-spacing:-.025em; margin-bottom:16px; }
+    .book-sub { font-size:1.05rem; color:rgba(255,255,255,.84); line-height:1.75; margin-bottom:44px; }
+    .btn-white {
+      background:var(--white); color:var(--c500); padding:17px 44px; border-radius:var(--r-full);
+      font-size:.96rem; font-weight:700; text-decoration:none; letter-spacing:.01em;
+      display:inline-block; box-shadow:0 10px 36px rgba(0,0,0,.16); transition:all .3s var(--ease);
+    }
+    .btn-white:hover { transform:translateY(-3px); box-shadow:0 16px 44px rgba(0,0,0,.22); }
+    .book-note { margin-top:18px; font-size:.8rem; color:rgba(255,255,255,.62); }
+    .book-note a { color:rgba(255,255,255,.8); }
+
+    /* ─── FOOTER ─── */
+    footer { background:var(--n900); padding:72px 56px 40px; }
+    .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:56px; margin-bottom:60px; }
+    .footer-logo { font-family:var(--font-display); font-size:1.55rem; font-weight:700; color:var(--white); letter-spacing:-.02em; display:block; margin-bottom:4px; }
+    .footer-logo-sub { font-size:.68rem; color:rgba(255,255,255,.38); letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:18px; }
+    .footer-desc { font-size:.86rem; color:rgba(255,255,255,.5); line-height:1.78; max-width:270px; }
+    .footer-social { display:flex; gap:10px; margin-top:22px; }
+    .soc {
+      width:38px; height:38px; border-radius:var(--r-xs);
+      background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+      display:flex; align-items:center; justify-content:center; text-decoration:none; transition:all .28s var(--ease);
+    }
+    .soc:hover { background:var(--c500); border-color:var(--c500); transform:translateY(-2px); }
+    .soc svg { width:16px; height:16px; fill:rgba(255,255,255,.65); transition:fill .28s; }
+    .soc:hover svg { fill:var(--white); }
+    .fcol-title { font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.38); margin-bottom:20px; }
+    .flinks { list-style:none; display:flex; flex-direction:column; gap:11px; }
+    .flinks a { font-size:.86rem; color:rgba(255,255,255,.56); text-decoration:none; transition:color .25s; }
+    .flinks a:hover { color:var(--c300); }
+    .footer-bottom { max-width:1200px; margin:0 auto; padding-top:28px; border-top:1px solid rgba(255,255,255,.07); display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy, .footer-made { font-size:.8rem; color:rgba(255,255,255,.3); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width:1100px) {
+      .nav,.nav.scrolled { padding-left:32px; padding-right:32px; }
+      section { padding:80px 32px; }
+      .book { padding:80px 32px; }
+      footer { padding:60px 32px 36px; }
+      .stats-strip-inner { padding:0 32px; }
+      .phil-grid { grid-template-columns:1fr; gap:48px; }
+      .about-grid { grid-template-columns:1fr; gap:48px; }
+      .about-visual { max-width:360px; }
+      .services-grid { grid-template-columns:repeat(2,1fr); }
+      .footer-grid { grid-template-columns:1fr 1fr; gap:40px; }
+    }
+    @media (max-width:768px) {
+      .nav { padding:16px 24px; } .nav.scrolled { padding:12px 24px; }
+      .nav-links { display:none; }
+      .nav-right .lang-toggle { display:none; }
+      .nav-hamburger { display:flex; }
+      .hero { padding:110px 24px 80px; }
+      section { padding:64px 24px; }
+      .book { padding:72px 24px; }
+      footer { padding:52px 24px 32px; }
+      .stats-strip-inner { grid-template-columns:repeat(2,1fr); padding:0; }
+      .stat-item { padding:28px 16px; }
+      .services-header { flex-direction:column; align-items:flex-start; }
+      .services-note { text-align:left; }
+      .services-grid { grid-template-columns:1fr; }
+      .process-steps { grid-template-columns:1fr; gap:44px; }
+      .process-steps::before { display:none; }
+      .tgrid { grid-template-columns:1fr; }
+      .insights-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; gap:32px; }
+      .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+      .about-badge { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE NAV ─── -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Menú">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">&#10005;</button>
+  <a href="#about"        onclick="closeMobileNav()" data-i18n="nav-phil">Filosofía</a>
+  <a href="#yazmin"       onclick="closeMobileNav()" data-i18n="nav-about">Sobre Yazmin</a>
+  <a href="#services"     onclick="closeMobileNav()" data-i18n="nav-services">Servicios</a>
+  <a href="#process"      onclick="closeMobileNav()" data-i18n="nav-process">Proceso</a>
+  <a href="#testimonials" onclick="closeMobileNav()" data-i18n="nav-stories">Testimonios</a>
+  <a href="#book"         onclick="closeMobileNav()" data-i18n="nav-book">Agendar Sesión</a>
+  <div class="mobile-lang-toggle">
+    <button class="mobile-lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+    <button class="mobile-lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-main">Talent Room</span>
+    <span class="nav-logo-sub" data-i18n="nav-sub">por Yazmin Rios</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about"        data-i18n="nav-phil">Filosofía</a></li>
+      <li><a href="#yazmin"       data-i18n="nav-about">Sobre Yazmin</a></li>
+      <li><a href="#services"     data-i18n="nav-services">Servicios</a></li>
+      <li><a href="#process"      data-i18n="nav-process">Proceso</a></li>
+      <li><a href="#testimonials" data-i18n="nav-stories">Testimonios</a></li>
+      <li><a href="#book" class="nav-cta" data-i18n="nav-book">Agendar Sesión</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+  <button class="nav-hamburger" onclick="openMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+  <div class="hero-dots"           aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot" aria-hidden="true"></span>
+      <span data-i18n="hero-badge">Asesoría de Carrera &nbsp;·&nbsp; Desarrollo Humano</span>
+    </div>
+    <h1 class="hero-h1" data-i18n="hero-h1">
+      Reconecta con tu<br><em>valor profesional.</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero-sub">
+      Las transiciones de carrera son más que encontrar un nuevo trabajo. Son momentos para
+      redescubrir quién eres, qué aportas y dónde realmente perteneces. Talent Room camina
+      este camino contigo — con estrategia y humanidad.
+    </p>
+    <div class="hero-actions">
+      <a href="#book"     class="btn-primary" data-i18n="hero-cta1">Agenda una Conversación Gratuita</a>
+      <a href="#services" class="btn-outline"  data-i18n="hero-cta2">Explorar Servicios</a>
+    </div>
+  </div>
+  <button class="hero-scroll-cue" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-line" aria-hidden="true"></div>
+    <span data-i18n="hero-scroll">Desplazar</span>
+  </button>
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stats-strip" id="stats">
+  <div class="stats-strip-inner">
+    <div class="stat-item fu">
+      <div class="stat-num">18+</div>
+      <div class="stat-label" data-i18n="stat-1">Años en Adquisición de Talento</div>
+    </div>
+    <div class="stat-item fu fd1">
+      <div class="stat-num">200+</div>
+      <div class="stat-label" data-i18n="stat-2">Profesionales Mentoreados</div>
+    </div>
+    <div class="stat-item fu fd2">
+      <div class="stat-num">5</div>
+      <div class="stat-label" data-i18n="stat-3">Empresas Globales Lideradas</div>
+    </div>
+    <div class="stat-item fu fd3">
+      <div class="stat-num">1</div>
+      <div class="stat-label" data-i18n="stat-4">Enfoque Centrado en el Ser Humano</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PHILOSOPHY ─── -->
+<section class="philosophy" id="about">
+  <div class="container">
+    <div class="label fu"      data-i18n="phil-label">Nuestra Filosofía</div>
+    <h2 class="h2 fu fd1"     data-i18n="phil-h2">Más que un coach de carrera.</h2>
+    <div class="phil-grid">
+      <div class="phil-text fu fd1">
+        <p data-i18n="phil-p1">En Talent Room, creemos que <strong>las transiciones de carrera son eventos de identidad</strong>. Cuando pierdes un trabajo o te sientes estancado profesionalmente, no solo afecta tu currículum — toca tu sentido de identidad, tus relaciones, tu energía y tu sentido de propósito.</p>
+        <p data-i18n="phil-p2">Por eso nuestro enfoque no es transaccional. No te damos una plantilla y te deseamos suerte. Nos <strong>sentamos contigo en la incertidumbre</strong> y te ayudamos a construir claridad desde adentro — combinando estrategia ejecutiva con inteligencia humana genuina.</p>
+        <p data-i18n="phil-p3">El resultado no es solo un nuevo trabajo. Es una identidad profesional renovada: una que refleja en quién te has convertido y en quién quieres ser.</p>
+      </div>
+      <div class="table-card fu fd3">
+        <div class="table-card-head">
+          <div class="table-card-title" data-i18n="table-title">La Mesa de 4 Patas</div>
+          <div class="table-card-sub"   data-i18n="table-sub">El trabajo es solo una parte de quién eres</div>
+        </div>
+        <div class="table-legs">
+          <div class="table-leg">
+            <div class="leg-icon">💼</div>
+            <div class="leg-name" data-i18n="leg1-name">Profesional</div>
+            <div class="leg-desc" data-i18n="leg1-desc">Carrera, propósito, habilidades e impacto</div>
+          </div>
+          <div class="table-leg">
+            <div class="leg-icon">💛</div>
+            <div class="leg-name" data-i18n="leg2-name">Emocional</div>
+            <div class="leg-desc" data-i18n="leg2-desc">Bienestar, resiliencia, autoconocimiento</div>
+          </div>
+          <div class="table-leg">
+            <div class="leg-icon">🤝</div>
+            <div class="leg-name" data-i18n="leg3-name">Relacional</div>
+            <div class="leg-desc" data-i18n="leg3-desc">Comunidad, pertenencia y apoyo</div>
+          </div>
+          <div class="table-leg">
+            <div class="leg-icon">✨</div>
+            <div class="leg-name" data-i18n="leg4-name">Propósito</div>
+            <div class="leg-desc" data-i18n="leg4-desc">Significado, valores y dirección</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT YAZMIN ─── -->
+<section class="about" id="yazmin">
+  <div class="container">
+    <div class="label fu"  data-i18n="about-label">Conoce a Yazmin</div>
+    <h2 class="h2 fu fd1"  data-i18n="about-h2">De confianza para líderes.<br>Humana en esencia.</h2>
+    <div class="about-grid">
+      <div class="about-visual fu">
+        <div class="about-photo" role="img" aria-label="Yazmin Rios">
+          <div class="photo-initials" aria-hidden="true">YR</div>
+          <div class="photo-overlay">
+            <div>
+              <span class="photo-name-main">Yazmin Rios</span>
+              <span class="photo-name-sub" data-i18n="photo-sub">Asesora de Carrera &nbsp;·&nbsp; Desarrollo Humano</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-badge about-badge-1">
+          <div class="badge-num">18+</div>
+          <div class="badge-label" data-i18n="badge-1">Años en Adquisición de Talento</div>
+        </div>
+        <div class="about-badge about-badge-2">
+          <div class="badge-num">200+</div>
+          <div class="badge-label" data-i18n="badge-2">Profesionales Acompañados</div>
+        </div>
+      </div>
+      <div class="about-content fu fd2">
+        <h3 data-i18n="about-h3">18 años construyendo prácticas de talento en empresas globales. Ahora ayudando a individuos a construir las propias.</h3>
+        <p data-i18n="about-p1">He pasado la mayor parte de mi carrera dentro de grandes organizaciones — PwC, General Motors, HP, Jabil, Amdocs — construyendo y liderando equipos de Adquisición de Talento desde cero. Sé cómo se toman las decisiones de contratación desde adentro.</p>
+        <p data-i18n="about-p2">Pero en algún momento del camino, me volví más interesada en los seres humanos detrás de los currículums. En el profesional que fue ignorado y no sabía por qué. En el líder que salió de un ambiente tóxico y de repente se sintió invisible. En el alto desempeño que tenía todo en papel pero había perdido su chispa.</p>
+        <p data-i18n="about-p3">Por eso fundé Talent Room. Para unir experiencia estratégica con acompañamiento humano genuino — porque ambos son necesarios, y la mayoría de los servicios solo ofrecen uno. Tengo una Maestría en Desarrollo Humano, y traigo esa perspectiva a cada conversación.</p>
+        <div class="credential-tags">
+          <span class="ctag" data-i18n="ctag-1">Maestría en Desarrollo Humano</span>
+          <span class="ctag" data-i18n="ctag-2">18+ Años Liderando AT</span>
+          <span class="ctag" data-i18n="ctag-3">200+ Profesionales Mentoreados</span>
+          <span class="ctag" data-i18n="ctag-4">Estratega de Carrera Ejecutiva</span>
+        </div>
+        <div class="companies-section">
+          <div class="companies-label" data-i18n="companies-label">Experiencia en</div>
+          <div class="companies-chips">
+            <span class="chip">PwC</span>
+            <span class="chip">General Motors</span>
+            <span class="chip">HP</span>
+            <span class="chip">Jabil</span>
+            <span class="chip">Amdocs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="label fu"  data-i18n="svc-label">Lo Que Ofrecemos</div>
+        <h2 class="h2 fu fd1" data-i18n="svc-h2">Servicios diseñados<br>para tu transición.</h2>
+      </div>
+      <p class="services-note fu fd2" data-i18n="svc-note">Cada servicio es personalizado. No hay programas rígidos — solo lo que realmente necesitas.</p>
+    </div>
+    <div class="services-grid">
+      <div class="scard fu">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s1-title">Mentoría de Carrera</div>
+        <div class="scard-desc"  data-i18n="s1-desc">Sesiones estratégicas 1:1 para mapear tus fortalezas, clarificar tus metas y diseñar un camino que refleje quién realmente eres — no solo lo que el mercado espera.</div>
+      </div>
+      <div class="scard fu fd1">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h4"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s2-title">Optimización de CV y LinkedIn</div>
+        <div class="scard-desc"  data-i18n="s2-desc">Tu narrativa profesional reescrita con conocimiento interno. Aprende cómo los reclutadores realmente leen los perfiles y haz que el tuyo sea imposible de ignorar.</div>
+      </div>
+      <div class="scard fu fd2">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s3-title">Preparación para Entrevistas</div>
+        <div class="scard-desc"  data-i18n="s3-desc">Entrenamiento conductual, técnico y a nivel ejecutivo con la profundidad de alguien que ha estado en ambos lados de la mesa — cientos de veces.</div>
+      </div>
+      <div class="scard fu fd1">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s4-title">Reposicionamiento Profesional</div>
+        <div class="scard-desc"  data-i18n="s4-desc">Para profesionales que cambian de industria, función o nivel. Reconstruimos tu narrativa de posicionamiento para que la transición tenga sentido — y sea convincente.</div>
+      </div>
+      <div class="scard fu fd2">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s5-title">Acompañamiento Emocional</div>
+        <div class="scard-desc"  data-i18n="s5-desc">El desempleo no es solo un reto profesional — es emocional. Creamos un espacio seguro y sin juicios para procesar, replantear y avanzar con renovada confianza.</div>
+      </div>
+      <div class="scard fu fd3">
+        <div class="scard-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <div class="scard-title" data-i18n="s6-title">Sesiones de Claridad de Carrera</div>
+        <div class="scard-desc"  data-i18n="s6-desc">¿Te sientes perdido o estancado? Estas sesiones enfocadas te ayudan a reconectar con tus valores, identificar tus fortalezas y encontrar la dirección que realmente resuena contigo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="process-head">
+      <div class="label label--center fu" data-i18n="proc-label">Cómo Funciona</div>
+      <h2 class="h2 fu fd1" style="text-align:center" data-i18n="proc-h2">Tres pasos.<br>Una conversación real a la vez.</h2>
+      <p class="section-sub fu fd2" style="text-align:center;margin:0 auto" data-i18n="proc-sub">No hay programas rígidos aquí. Solo un proceso humano que se adapta a dónde estás y a lo que necesitas.</p>
+    </div>
+    <div class="process-steps">
+      <div class="pstep fu">
+        <div class="pstep-num">01</div>
+        <div class="pstep-title" data-i18n="p1-title">Entendemos Tu Historia</div>
+        <div class="pstep-desc"  data-i18n="p1-desc">Comenzamos escuchando de verdad. Tu trayectoria, tus retos, tus aspiraciones y lo que te ha frenado. Sin plantillas. Solo una conversación honesta.</div>
+      </div>
+      <div class="pstep fu fd2">
+        <div class="pstep-num">02</div>
+        <div class="pstep-title" data-i18n="p2-title">Reconstruimos Claridad y Posicionamiento</div>
+        <div class="pstep-desc"  data-i18n="p2-desc">Juntos mapeamos tus fortalezas, refinamos tu narrativa profesional y construimos la base estratégica que hace tu valor visible ante las oportunidades correctas.</div>
+      </div>
+      <div class="pstep fu fd4">
+        <div class="pstep-num">03</div>
+        <div class="pstep-title" data-i18n="p3-title">Creamos una Estrategia Accionable</div>
+        <div class="pstep-desc"  data-i18n="p3-desc">Con claridad llega la dirección. Diseñamos un plan de acción concreto y personalizado — desde el alcance hasta las entrevistas y el mindset — para que avances con confianza real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials" id="testimonials">
+  <div class="container testimonials-inner">
+    <div class="label label--light fu" data-i18n="testi-label">Historias Reales</div>
+    <h2 class="h2 h2--white fu fd1"   data-i18n="testi-h2">Lo que dicen quienes<br>trabajaron con Yazmin.</h2>
+    <p class="section-sub section-sub--white fu fd2" data-i18n="testi-sub">No son métricas de éxito. Son transformaciones reales de profesionales reales.</p>
+    <div class="tgrid">
+      <div class="tcard fu">
+        <div class="tquote" aria-hidden="true">"</div>
+        <p class="ttext" data-i18n="t1-text">Después de un despido, me sentí completamente invisible. Yazmin me ayudó a ver que el problema no era mi valor — era cómo lo comunicaba. En seis semanas tuve tres entrevistas y una oferta. Pero más importante, dejé de sentir vergüenza por donde estaba.</p>
+        <div class="tauthor">
+          <div class="tavatar" aria-hidden="true">MC</div>
+          <div>
+            <div class="tname">Mariana C.</div>
+            <div class="trole" data-i18n="t1-role">Directora de Marketing · Guadalajara</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard fu fd2">
+        <div class="tquote" aria-hidden="true">"</div>
+        <p class="ttext" data-i18n="t2-text">Llevaba 15 años en la misma industria y me sentía completamente atrapado. El trabajo de reposicionamiento que hicimos juntos fue la reflexión profesional más honesta que había hecho. No solo encontré un nuevo trabajo — encontré una nueva dirección.</p>
+        <div class="tauthor">
+          <div class="tavatar" aria-hidden="true">RS</div>
+          <div>
+            <div class="tname">Ricardo S.</div>
+            <div class="trole" data-i18n="t2-role">Ejecutivo de Finanzas · Ciudad de México</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard fu fd4">
+        <div class="tquote" aria-hidden="true">"</div>
+        <p class="ttext" data-i18n="t3-text">Lo que encontré en Talent Room no fue una reclutadora ni una coach. Fue alguien que genuinamente entendió los dos mundos — el emocional y el estratégico. Esa combinación es rara, y marcó toda la diferencia en mi transición.</p>
+        <div class="tauthor">
+          <div class="tavatar" aria-hidden="true">LP</div>
+          <div>
+            <div class="tname">Lorena P.</div>
+            <div class="trole" data-i18n="t3-role">HR Business Partner · Monterrey</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INSIGHTS ─── -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="label fu"     data-i18n="ins-label">Ideas y Perspectivas</div>
+    <h2 class="h2 fu fd1"    data-i18n="ins-h2">Ideas que te impulsan.</h2>
+    <p class="section-sub fu fd2" data-i18n="ins-sub">Reflexiones prácticas sobre carrera, confianza e identidad profesional.</p>
+    <div class="insights-grid">
+      <article class="icard fu">
+        <div class="icard-visual">🔍<span class="itopic" data-i18n="i1-topic">LinkedIn</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i1-title">Tu titular de LinkedIn no es tu puesto de trabajo</div>
+          <div class="icard-text"  data-i18n="i1-text">Un reclutador pasa 6 segundos en tu perfil. Tu titular debe decir quién eres, no dónde trabajaste. Así se hace que cuente.</div>
+        </div>
+      </article>
+      <article class="icard fu fd1">
+        <div class="icard-visual">🎯<span class="itopic" data-i18n="i2-topic">Entrevistas</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i2-title">La pregunta que todo entrevistador realmente hace</div>
+          <div class="icard-text"  data-i18n="i2-text">Detrás de cada pregunta conductual hay una sola preocupación: "¿Puedo confiar en esta persona en una situación difícil?" Tu preparación debe responder eso — siempre.</div>
+        </div>
+      </article>
+      <article class="icard fu fd2">
+        <div class="icard-visual">💬<span class="itopic" data-i18n="i3-topic">Mentalidad</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i3-title">El silencio entre trabajos tiene algo que decirte</div>
+          <div class="icard-text"  data-i18n="i3-text">El desempleo no es una pausa — es información. La incomodidad, la claridad, las cosas que de repente te importan: son parte de la transición, no separadas de ella.</div>
+        </div>
+      </article>
+      <article class="icard fu fd1">
+        <div class="icard-visual">🌱<span class="itopic" data-i18n="i4-topic">Confianza</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i4-title">Por qué los altos desempeños se dudan más tras un despido</div>
+          <div class="icard-text"  data-i18n="i4-text">Cuanto mejor eres en tu trabajo, más se vincula tu identidad a él. Cuando eso desaparece, el impacto emocional es desproporcionado — y raramente se habla de ello.</div>
+        </div>
+      </article>
+      <article class="icard fu fd2">
+        <div class="icard-visual">🤝<span class="itopic" data-i18n="i5-topic">Networking</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i5-title">Hacer networking no es pedir favores — es construir contexto</div>
+          <div class="icard-text"  data-i18n="i5-text">La mayoría evita el networking porque se siente transaccional. Los profesionales que avanzan más rápido invierten en relaciones antes de necesitarlas.</div>
+        </div>
+      </article>
+      <article class="icard fu fd3">
+        <div class="icard-visual">🔄<span class="itopic" data-i18n="i6-topic">Cambio de Carrera</span></div>
+        <div class="icard-body">
+          <div class="icard-title" data-i18n="i6-title">Cambiar de carrera después de los 35 no es empezar de cero</div>
+          <div class="icard-text"  data-i18n="i6-text">La experiencia es portátil. La claridad es una ventaja. Y el profesional que ha vivido algo real suele superar al que solo ha conocido la certeza.</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BOOK ─── -->
+<section class="book" id="book">
+  <div class="book-inner fu">
+    <div class="label label--center" style="color:rgba(255,255,255,.75);display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:16px;">
+      <span style="display:block;width:26px;height:2px;background:rgba(255,255,255,.5);border-radius:2px;"></span>
+      <span data-i18n="book-label">Empieza Aquí</span>
+    </div>
+    <h2 class="book-title" data-i18n="book-title">¿Lista para reconectar<br>con tu valor?</h2>
+    <p class="book-sub"    data-i18n="book-sub">La primera conversación es gratuita. Sin plantillas, sin presión. Solo una mirada honesta a dónde estás y a dónde quieres ir.</p>
+    <a href="mailto:contacto@talentroom.mx" class="btn-white" data-i18n="book-cta">Agenda una Conversación Gratuita</a>
+    <p class="book-note">
+      <span data-i18n="book-note1">O contáctanos directamente en</span>
+      <a href="https://www.instagram.com/ttalent_room/" target="_blank" rel="noopener">Instagram</a>
+      <span data-i18n="book-note2">o</span>
+      <a href="https://www.linkedin.com/in/yazmin-rios1982/" target="_blank" rel="noopener">LinkedIn</a>
+      <span data-i18n="book-note3">— lo que te resulte más natural.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">Talent Room</span>
+      <span class="footer-logo-sub" data-i18n="footer-logo-sub">por Yazmin Rios &nbsp;·&nbsp; Asesoría de Carrera</span>
+      <p class="footer-desc" data-i18n="footer-desc">Transiciones de carrera con estrategia y humanidad. Para profesionales que quieren más que un trabajo — quieren claridad, confianza y una dirección que sea verdaderamente suya.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/ttalent_room/" target="_blank" rel="noopener" class="soc" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/ttalentroom" target="_blank" rel="noopener" class="soc" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/yazmin-rios1982/" target="_blank" rel="noopener" class="soc" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:contacto@talentroom.mx" class="soc" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-title" data-i18n="fcol-nav">Navegar</div>
+      <ul class="flinks">
+        <li><a href="#about"        data-i18n="fl-phil">Filosofía</a></li>
+        <li><a href="#yazmin"       data-i18n="fl-about">Sobre Yazmin</a></li>
+        <li><a href="#services"     data-i18n="fl-services">Servicios</a></li>
+        <li><a href="#process"      data-i18n="fl-process">Proceso</a></li>
+        <li><a href="#testimonials" data-i18n="fl-stories">Testimonios</a></li>
+        <li><a href="#insights"     data-i18n="fl-insights">Ideas</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-title" data-i18n="fcol-svc">Servicios</div>
+      <ul class="flinks">
+        <li><a href="#services" data-i18n="fl-s1">Mentoría de Carrera</a></li>
+        <li><a href="#services" data-i18n="fl-s2">CV y LinkedIn</a></li>
+        <li><a href="#services" data-i18n="fl-s3">Prep. para Entrevistas</a></li>
+        <li><a href="#services" data-i18n="fl-s4">Reposicionamiento</a></li>
+        <li><a href="#services" data-i18n="fl-s5">Apoyo en la Transición</a></li>
+        <li><a href="#services" data-i18n="fl-s6">Sesiones de Claridad</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-title" data-i18n="fcol-connect">Conectar</div>
+      <ul class="flinks">
+        <li><a href="https://www.instagram.com/ttalent_room/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/ttalentroom"    target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/in/yazmin-rios1982/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:contacto@talentroom.mx" data-i18n="fl-email">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy" data-i18n="footer-copy">© 2026 Talent Room. Todos los derechos reservados.</span>
+    <span class="footer-made" data-i18n="footer-made">Hecho para Yazmin Rios.</span>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════════════ */
+const i18n = {
+  es: {
+    /* nav */
+    "nav-sub":       "por Yazmin Rios",
+    "nav-phil":      "Filosofía",
+    "nav-about":     "Sobre Yazmin",
+    "nav-services":  "Servicios",
+    "nav-process":   "Proceso",
+    "nav-stories":   "Testimonios",
+    "nav-book":      "Agendar Sesión",
+    /* hero */
+    "hero-badge":    "Asesoría de Carrera &nbsp;·&nbsp; Desarrollo Humano",
+    "hero-h1":       "Reconecta con tu<br><em>valor profesional.</em>",
+    "hero-sub":      "Las transiciones de carrera son más que encontrar un nuevo trabajo. Son momentos para redescubrir quién eres, qué aportas y dónde realmente perteneces. Talent Room camina este camino contigo — con estrategia y humanidad.",
+    "hero-cta1":     "Agenda una Conversación Gratuita",
+    "hero-cta2":     "Explorar Servicios",
+    "hero-scroll":   "Desplazar",
+    /* stats */
+    "stat-1": "Años en Adquisición de Talento",
+    "stat-2": "Profesionales Mentoreados",
+    "stat-3": "Empresas Globales Lideradas",
+    "stat-4": "Enfoque Centrado en el Ser Humano",
+    /* philosophy */
+    "phil-label": "Nuestra Filosofía",
+    "phil-h2":    "Más que un coach de carrera.",
+    "phil-p1":    "En Talent Room, creemos que <strong>las transiciones de carrera son eventos de identidad</strong>. Cuando pierdes un trabajo o te sientes estancado profesionalmente, no solo afecta tu currículum — toca tu sentido de identidad, tus relaciones, tu energía y tu sentido de propósito.",
+    "phil-p2":    "Por eso nuestro enfoque no es transaccional. No te damos una plantilla y te deseamos suerte. Nos <strong>sentamos contigo en la incertidumbre</strong> y te ayudamos a construir claridad desde adentro — combinando estrategia ejecutiva con inteligencia humana genuina.",
+    "phil-p3":    "El resultado no es solo un nuevo trabajo. Es una identidad profesional renovada: una que refleja en quién te has convertido y en quién quieres ser.",
+    "table-title": "La Mesa de 4 Patas",
+    "table-sub":   "El trabajo es solo una parte de quién eres",
+    "leg1-name": "Profesional",  "leg1-desc": "Carrera, propósito, habilidades e impacto",
+    "leg2-name": "Emocional",    "leg2-desc": "Bienestar, resiliencia, autoconocimiento",
+    "leg3-name": "Relacional",   "leg3-desc": "Comunidad, pertenencia y apoyo",
+    "leg4-name": "Propósito",    "leg4-desc": "Significado, valores y dirección",
+    /* about */
+    "about-label": "Conoce a Yazmin",
+    "about-h2":    "De confianza para líderes.<br>Humana en esencia.",
+    "photo-sub":   "Asesora de Carrera &nbsp;·&nbsp; Desarrollo Humano",
+    "badge-1":     "Años en Adquisición de Talento",
+    "badge-2":     "Profesionales Acompañados",
+    "about-h3":    "18 años construyendo prácticas de talento en empresas globales. Ahora ayudando a individuos a construir las propias.",
+    "about-p1":    "He pasado la mayor parte de mi carrera dentro de grandes organizaciones — PwC, General Motors, HP, Jabil, Amdocs — construyendo y liderando equipos de Adquisición de Talento desde cero. Sé cómo se toman las decisiones de contratación desde adentro.",
+    "about-p2":    "Pero en algún momento del camino, me volví más interesada en los seres humanos detrás de los currículums. En el profesional que fue ignorado y no sabía por qué. En el líder que salió de un ambiente tóxico y de repente se sintió invisible. En el alto desempeño que tenía todo en papel pero había perdido su chispa.",
+    "about-p3":    "Por eso fundé Talent Room. Para unir experiencia estratégica con acompañamiento humano genuino — porque ambos son necesarios, y la mayoría de los servicios solo ofrecen uno. Tengo una Maestría en Desarrollo Humano, y traigo esa perspectiva a cada conversación.",
+    "ctag-1": "Maestría en Desarrollo Humano", "ctag-2": "18+ Años Liderando AT",
+    "ctag-3": "200+ Profesionales Mentoreados", "ctag-4": "Estratega de Carrera Ejecutiva",
+    "companies-label": "Experiencia en",
+    /* services */
+    "svc-label": "Lo Que Ofrecemos",
+    "svc-h2":    "Servicios diseñados<br>para tu transición.",
+    "svc-note":  "Cada servicio es personalizado. No hay programas rígidos — solo lo que realmente necesitas.",
+    "s1-title": "Mentoría de Carrera",
+    "s1-desc":  "Sesiones estratégicas 1:1 para mapear tus fortalezas, clarificar tus metas y diseñar un camino que refleje quién realmente eres — no solo lo que el mercado espera.",
+    "s2-title": "Optimización de CV y LinkedIn",
+    "s2-desc":  "Tu narrativa profesional reescrita con conocimiento interno. Aprende cómo los reclutadores realmente leen los perfiles y haz que el tuyo sea imposible de ignorar.",
+    "s3-title": "Preparación para Entrevistas",
+    "s3-desc":  "Entrenamiento conductual, técnico y a nivel ejecutivo con la profundidad de alguien que ha estado en ambos lados de la mesa — cientos de veces.",
+    "s4-title": "Reposicionamiento Profesional",
+    "s4-desc":  "Para profesionales que cambian de industria, función o nivel. Reconstruimos tu narrativa de posicionamiento para que la transición tenga sentido — y sea convincente.",
+    "s5-title": "Acompañamiento Emocional",
+    "s5-desc":  "El desempleo no es solo un reto profesional — es emocional. Creamos un espacio seguro y sin juicios para procesar, replantear y avanzar con renovada confianza.",
+    "s6-title": "Sesiones de Claridad de Carrera",
+    "s6-desc":  "¿Te sientes perdido o estancado? Estas sesiones enfocadas te ayudan a reconectar con tus valores, identificar tus fortalezas y encontrar la dirección que realmente resuena contigo.",
+    /* process */
+    "proc-label": "Cómo Funciona",
+    "proc-h2":    "Tres pasos.<br>Una conversación real a la vez.",
+    "proc-sub":   "No hay programas rígidos aquí. Solo un proceso humano que se adapta a dónde estás y a lo que necesitas.",
+    "p1-title": "Entendemos Tu Historia",
+    "p1-desc":  "Comenzamos escuchando de verdad. Tu trayectoria, tus retos, tus aspiraciones y lo que te ha frenado. Sin plantillas. Solo una conversación honesta.",
+    "p2-title": "Reconstruimos Claridad y Posicionamiento",
+    "p2-desc":  "Juntos mapeamos tus fortalezas, refinamos tu narrativa profesional y construimos la base estratégica que hace tu valor visible ante las oportunidades correctas.",
+    "p3-title": "Creamos una Estrategia Accionable",
+    "p3-desc":  "Con claridad llega la dirección. Diseñamos un plan de acción concreto y personalizado — desde el alcance hasta las entrevistas y el mindset — para que avances con confianza real.",
+    /* testimonials */
+    "testi-label": "Historias Reales",
+    "testi-h2":    "Lo que dicen quienes<br>trabajaron con Yazmin.",
+    "testi-sub":   "No son métricas de éxito. Son transformaciones reales de profesionales reales.",
+    "t1-text": "Después de un despido, me sentí completamente invisible. Yazmin me ayudó a ver que el problema no era mi valor — era cómo lo comunicaba. En seis semanas tuve tres entrevistas y una oferta. Pero más importante, dejé de sentir vergüenza por donde estaba.",
+    "t1-role": "Directora de Marketing · Guadalajara",
+    "t2-text": "Llevaba 15 años en la misma industria y me sentía completamente atrapado. El trabajo de reposicionamiento que hicimos juntos fue la reflexión profesional más honesta que había hecho. No solo encontré un nuevo trabajo — encontré una nueva dirección.",
+    "t2-role": "Ejecutivo de Finanzas · Ciudad de México",
+    "t3-text": "Lo que encontré en Talent Room no fue una reclutadora ni una coach. Fue alguien que genuinamente entendió los dos mundos — el emocional y el estratégico. Esa combinación es rara, y marcó toda la diferencia en mi transición.",
+    "t3-role": "HR Business Partner · Monterrey",
+    /* insights */
+    "ins-label": "Ideas y Perspectivas",
+    "ins-h2":    "Ideas que te impulsan.",
+    "ins-sub":   "Reflexiones prácticas sobre carrera, confianza e identidad profesional.",
+    "i1-topic": "LinkedIn",    "i1-title": "Tu titular de LinkedIn no es tu puesto de trabajo",     "i1-text": "Un reclutador pasa 6 segundos en tu perfil. Tu titular debe decir quién eres, no dónde trabajaste. Así se hace que cuente.",
+    "i2-topic": "Entrevistas", "i2-title": "La pregunta que todo entrevistador realmente hace",       "i2-text": "Detrás de cada pregunta conductual hay una sola preocupación: \"¿Puedo confiar en esta persona en una situación difícil?\" Tu preparación debe responder eso — siempre.",
+    "i3-topic": "Mentalidad",  "i3-title": "El silencio entre trabajos tiene algo que decirte",       "i3-text": "El desempleo no es una pausa — es información. La incomodidad, la claridad, las cosas que de repente te importan: son parte de la transición, no separadas de ella.",
+    "i4-topic": "Confianza",   "i4-title": "Por qué los altos desempeños se dudan más tras un despido","i4-text": "Cuanto mejor eres en tu trabajo, más se vincula tu identidad a él. Cuando eso desaparece, el impacto emocional es desproporcionado — y raramente se habla de ello.",
+    "i5-topic": "Networking",  "i5-title": "Hacer networking no es pedir favores — es construir contexto","i5-text": "La mayoría evita el networking porque se siente transaccional. Los profesionales que avanzan más rápido invierten en relaciones antes de necesitarlas.",
+    "i6-topic": "Cambio de Carrera","i6-title":"Cambiar de carrera después de los 35 no es empezar de cero","i6-text":"La experiencia es portátil. La claridad es una ventaja. Y el profesional que ha vivido algo real suele superar al que solo ha conocido la certeza.",
+    /* book */
+    "book-label": "Empieza Aquí",
+    "book-title": "¿Lista para reconectar<br>con tu valor?",
+    "book-sub":   "La primera conversación es gratuita. Sin plantillas, sin presión. Solo una mirada honesta a dónde estás y a dónde quieres ir.",
+    "book-cta":   "Agenda una Conversación Gratuita",
+    "book-note1": "O contáctanos directamente en",
+    "book-note2": "o",
+    "book-note3": "— lo que te resulte más natural.",
+    /* footer */
+    "footer-logo-sub": "por Yazmin Rios &nbsp;·&nbsp; Asesoría de Carrera",
+    "footer-desc":     "Transiciones de carrera con estrategia y humanidad. Para profesionales que quieren más que un trabajo — quieren claridad, confianza y una dirección que sea verdaderamente suya.",
+    "fcol-nav":     "Navegar",
+    "fcol-svc":     "Servicios",
+    "fcol-connect": "Conectar",
+    "fl-phil":    "Filosofía",   "fl-about":    "Sobre Yazmin",  "fl-services": "Servicios",
+    "fl-process": "Proceso",     "fl-stories":  "Testimonios",   "fl-insights": "Ideas",
+    "fl-s1": "Mentoría de Carrera",   "fl-s2": "CV y LinkedIn",        "fl-s3": "Prep. para Entrevistas",
+    "fl-s4": "Reposicionamiento",     "fl-s5": "Apoyo en la Transición","fl-s6": "Sesiones de Claridad",
+    "fl-email":    "Email",
+    "footer-copy": "© 2026 Talent Room. Todos los derechos reservados.",
+    "footer-made": "Hecho para Yazmin Rios."
+  },
+
+  en: {
+    /* nav */
+    "nav-sub":       "by Yazmin Rios",
+    "nav-phil":      "Philosophy",
+    "nav-about":     "About",
+    "nav-services":  "Services",
+    "nav-process":   "Process",
+    "nav-stories":   "Stories",
+    "nav-book":      "Book a Session",
+    /* hero */
+    "hero-badge":    "Career Advisory &nbsp;·&nbsp; Human Development",
+    "hero-h1":       "Reconnect with your<br><em>professional value.</em>",
+    "hero-sub":      "Career transitions are more than finding a new job. They are moments to rediscover who you are, what you bring, and where you truly belong. Talent Room walks this journey with you — strategically and humanly.",
+    "hero-cta1":     "Book a Free Conversation",
+    "hero-cta2":     "Explore Services",
+    "hero-scroll":   "Scroll",
+    /* stats */
+    "stat-1": "Years in Talent Acquisition",
+    "stat-2": "Professionals Mentored",
+    "stat-3": "Global Companies Led",
+    "stat-4": "Human-Centered Approach",
+    /* philosophy */
+    "phil-label": "Our Philosophy",
+    "phil-h2":    "More than a career coach.",
+    "phil-p1":    "At Talent Room, we believe that <strong>career transitions are identity events</strong>. When you lose a job or feel professionally stuck, it affects not just your resume — it touches your sense of self, your relationships, your energy, and your sense of purpose.",
+    "phil-p2":    "That is why our approach is not transactional. We do not hand you a template and wish you luck. We <strong>sit with you in the uncertainty</strong> and help you build clarity from the inside out — combining executive-level strategy with genuine human intelligence.",
+    "phil-p3":    "The result is not just a new job. It is a renewed professional identity: one that reflects who you have become and who you want to be.",
+    "table-title": "The 4-Leg Table",
+    "table-sub":   "Work is only one part of who you are",
+    "leg1-name": "Professional",  "leg1-desc": "Career, purpose, skills, and impact",
+    "leg2-name": "Emotional",     "leg2-desc": "Wellbeing, resilience, self-awareness",
+    "leg3-name": "Relational",    "leg3-desc": "Community, belonging, and support",
+    "leg4-name": "Purpose",       "leg4-desc": "Meaning, values, and direction",
+    /* about */
+    "about-label": "Meet Yazmin",
+    "about-h2":    "Trusted by leaders.<br>Human at heart.",
+    "photo-sub":   "Career Advisor &nbsp;·&nbsp; Human Development",
+    "badge-1":     "Years in Talent Acquisition",
+    "badge-2":     "Professionals Coached",
+    "about-h3":    "18 years building talent practices at global companies. Now helping individuals build their own.",
+    "about-p1":    "I have spent most of my career inside large organizations — PwC, General Motors, HP, Jabil, Amdocs — building and leading Talent Acquisition teams from the ground up. I know how hiring decisions are made from the inside.",
+    "about-p2":    "But somewhere along the way, I became more interested in the humans behind the resumes. In the professional who was passed over and did not know why. In the leader who left a toxic environment and suddenly felt invisible. In the high-performer who had everything on paper but had lost their spark.",
+    "about-p3":    "That is why I founded Talent Room. To bring together strategic expertise and genuine human accompaniment — because both are necessary, and most services offer only one. I hold a Master's degree in Human Development, and I bring that perspective into every conversation.",
+    "ctag-1": "Master's in Human Development", "ctag-2": "18+ Years TA Leadership",
+    "ctag-3": "200+ Professionals Mentored",   "ctag-4": "Executive Career Strategist",
+    "companies-label": "Experience across",
+    /* services */
+    "svc-label": "What We Offer",
+    "svc-h2":    "Services designed<br>around your transition.",
+    "svc-note":  "Every service is personalized. There are no rigid programs — only what you actually need.",
+    "s1-title": "Career Mentoring",
+    "s1-desc":  "Strategic 1:1 sessions to map your strengths, clarify your goals, and design a roadmap that reflects who you truly are — not just what the market expects.",
+    "s2-title": "CV & LinkedIn Optimization",
+    "s2-desc":  "Your professional narrative rewritten with insider knowledge. Learn how recruiters actually read profiles and make yours impossible to overlook.",
+    "s3-title": "Interview Preparation",
+    "s3-desc":  "Behavioral, technical, and executive-level coaching with the depth of someone who has sat on both sides of the table — hundreds of times.",
+    "s4-title": "Professional Repositioning",
+    "s4-desc":  "For professionals changing industries, functions, or seniority levels. We rebuild your positioning narrative so the transition makes sense — and feels compelling.",
+    "s5-title": "Emotional Support in Transition",
+    "s5-desc":  "Unemployment is not just a professional challenge — it is an emotional one. We create a safe, non-judgmental space to process, reframe, and move forward with renewed confidence.",
+    "s6-title": "Career Clarity Sessions",
+    "s6-desc":  "Feeling lost or stuck? These focused sessions help you reconnect with your values, identify your strengths, and find the direction that actually resonates with you.",
+    /* process */
+    "proc-label": "How It Works",
+    "proc-h2":    "Three steps.<br>One real conversation at a time.",
+    "proc-sub":   "There are no rigid programs here. Just a human process that adapts to where you are and what you need.",
+    "p1-title": "Understand Your Story",
+    "p1-desc":  "We begin by truly listening. Your background, your challenges, your aspirations, and what has been holding you back. No templates. Just an honest conversation.",
+    "p2-title": "Rebuild Clarity & Positioning",
+    "p2-desc":  "Together we map your strengths, refine your professional narrative, and build the strategic foundation that makes your value visible to the right opportunities.",
+    "p3-title": "Create an Actionable Strategy",
+    "p3-desc":  "With clarity comes direction. We design a concrete, personalized action plan — from outreach to interviews to mindset — so you move forward with real confidence.",
+    /* testimonials */
+    "testi-label": "Real Stories",
+    "testi-h2":    "What people say<br>after working with Yazmin.",
+    "testi-sub":   "These are not success metrics. These are real transformations from real professionals.",
+    "t1-text": "After a layoff, I felt completely invisible. Yazmin helped me see that the problem was not my value — it was how I was communicating it. Within six weeks I had three interviews and one offer. But more importantly, I stopped feeling ashamed of where I was.",
+    "t1-role": "Marketing Director · Guadalajara",
+    "t2-text": "I had been in the same industry for 15 years and felt completely trapped. The repositioning work we did together was the most honest professional self-reflection I had ever done. I did not just find a new job — I found a new direction.",
+    "t2-role": "Finance Executive · Mexico City",
+    "t3-text": "What I found in Talent Room was not a recruiter or a coach. It was someone who genuinely understood both worlds — the emotional and the strategic. That combination is rare, and it made all the difference in my transition.",
+    "t3-role": "HR Business Partner · Monterrey",
+    /* insights */
+    "ins-label": "Insights & Perspectives",
+    "ins-h2":    "Ideas that move you forward.",
+    "ins-sub":   "Practical reflections on career, confidence, and professional identity.",
+    "i1-topic": "LinkedIn",      "i1-title": "Your LinkedIn headline is not your job title",                     "i1-text": "A recruiter spends 6 seconds on your profile. Your headline needs to say who you are, not where you worked. Here is how to make it count.",
+    "i2-topic": "Interviews",    "i2-title": "The question every interviewer is really asking",                  "i2-text": "Behind every behavioral question is a single concern: \"Can I trust this person in a difficult situation?\" Your preparation should answer that — every time.",
+    "i3-topic": "Mindset",       "i3-title": "The silence between jobs has something to tell you",              "i3-text": "Unemployment is not a pause — it is information. The discomfort, the clarity, the things you suddenly realize matter: they are part of the transition, not separate from it.",
+    "i4-topic": "Confidence",    "i4-title": "Why high performers doubt themselves most after a layoff",        "i4-text": "The better you are at your job, the more your identity becomes tied to it. When that disappears, the emotional impact is disproportionate — and rarely discussed.",
+    "i5-topic": "Networking",    "i5-title": "Networking is not asking for favors — it is building context",   "i5-text": "Most people avoid networking because it feels transactional. The professionals who advance fastest invest in relationships before they need them.",
+    "i6-topic": "Career Change", "i6-title": "Changing careers after 35 is not starting over",                 "i6-text": "Experience is portable. Clarity is an advantage. And the professional who has lived something real often outperforms the one who has only known certainty.",
+    /* book */
+    "book-label": "Start Here",
+    "book-title": "Ready to reconnect<br>with your value?",
+    "book-sub":   "The first conversation is free. No templates, no pressure. Just an honest look at where you are and where you want to go.",
+    "book-cta":   "Book a Free Conversation",
+    "book-note1": "Or reach out directly on",
+    "book-note2": "or",
+    "book-note3": "— whichever feels more natural.",
+    /* footer */
+    "footer-logo-sub": "by Yazmin Rios &nbsp;·&nbsp; Career Advisory",
+    "footer-desc":     "Career transitions with strategy and humanity. For professionals who want more than a job — they want clarity, confidence, and a direction that is truly theirs.",
+    "fcol-nav":     "Navigate",
+    "fcol-svc":     "Services",
+    "fcol-connect": "Connect",
+    "fl-phil":    "Philosophy",   "fl-about":    "About Yazmin",  "fl-services": "Services",
+    "fl-process": "Process",      "fl-stories":  "Stories",       "fl-insights": "Insights",
+    "fl-s1": "Career Mentoring",  "fl-s2": "CV & LinkedIn",       "fl-s3": "Interview Prep",
+    "fl-s4": "Repositioning",     "fl-s5": "Transition Support",  "fl-s6": "Clarity Sessions",
+    "fl-email":    "Email",
+    "footer-copy": "© 2026 Talent Room. All rights reserved.",
+    "footer-made": "Built for Yazmin Rios."
+  }
+};
+
+/* ═══════════════════════════════════════════════
+   LANGUAGE ENGINE
+═══════════════════════════════════════════════ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+  });
+
+  document.querySelectorAll('.lang-btn, .mobile-lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  document.title = lang === 'es'
+    ? 'Talent Room — Reconecta con Tu Valor Profesional'
+    : 'Talent Room — Reconnect with Your Professional Value';
+}
+
+/* ═══════════════════════════════════════════════
+   NAV SCROLL
+═══════════════════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════ */
+const mobileNav = document.getElementById('mobileNav');
+function openMobileNav()  { mobileNav.classList.add('open');    document.body.style.overflow = 'hidden'; }
+function closeMobileNav() { mobileNav.classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════════ */
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.1, rootMargin: '0px 0px -36px 0px' }
+);
+document.querySelectorAll('.fu').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
